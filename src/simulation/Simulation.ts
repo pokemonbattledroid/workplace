@@ -82,11 +82,11 @@ class Particle {
     this.p.push();
     this.p.translate(this.pos.x, this.pos.y);
     this.p.noStroke();
-
+    
     let alpha = 200;
     let sizeMultiplier = mode === 'Cloud' ? 3 : 1;
     if (mode === 'Cloud') alpha = 50;
-
+    
     const c = this.color;
     this.p.fill(this.p.red(c), this.p.green(c), this.p.blue(c), alpha);
 
@@ -123,20 +123,20 @@ export class Simulation {
   init() {
     this.p.randomSeed(this.config.randomSeed);
     this.particles = [];
-
-    const teamColors = Array.from({ length: this.config.teamCount }, () =>
+    
+    const teamColors = Array.from({ length: this.config.teamCount }, () => 
       this.p.color(this.p.random(100, 255), this.p.random(100, 255), this.p.random(100, 255))
     );
 
     const teamSizes = this.allocateTeams(this.config.headcount, this.config.teamCount);
-
+    
     for (let t = 0; t < this.config.teamCount; t++) {
       for (let i = 0; i < teamSizes[t]; i++) {
         this.particles.push(new Particle(this.p, t, teamColors[t]));
       }
     }
 
-    this.meetingPoints = Array.from({ length: 5 }, () =>
+    this.meetingPoints = Array.from({ length: 5 }, () => 
       this.p.createVector(this.p.random(this.p.width * 0.2, this.p.width * 0.8), this.p.random(this.p.height * 0.2, this.p.height * 0.8))
     );
     this.offscreen.clear(0, 0, 0, 0);
@@ -156,7 +156,7 @@ export class Simulation {
 
   update(config: SimulationConfig) {
     this.config = config;
-
+    
     this.particles.forEach(part => {
       let meeting: p5.Vector | undefined;
       if (this.p.random(100) < this.config.collaborationSpace) {
@@ -186,7 +186,7 @@ export class Simulation {
 
   draw() {
     this.p.background(10, 10, 15);
-
+    
     // Draw persistence trails
     this.p.image(this.offscreen, 0, 0);
 
@@ -200,7 +200,7 @@ export class Simulation {
     this.particles.forEach(part => {
       this.applyLayoutConstraints(part);
       part.draw(this.config.renderMode);
-
+      
       if (this.config.renderMode === 'Dense') {
         this.p.noFill();
         this.p.stroke(this.p.red(part.color), this.p.green(part.color), this.p.blue(part.color), 30);
