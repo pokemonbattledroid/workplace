@@ -25,7 +25,7 @@ const UI: React.FC<Props> = ({ config, setConfig }) => {
     <div className="absolute top-6 left-6 w-80 bg-slate-900/80 backdrop-blur-md text-white p-6 rounded-2xl border border-slate-700 shadow-2xl space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold tracking-tight uppercase">Spatial Potential</h1>
-        <button 
+        <button
           onClick={() => handleChange('randomSeed', Math.random() * 1000)}
           className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
         >
@@ -49,7 +49,7 @@ const UI: React.FC<Props> = ({ config, setConfig }) => {
           <label className="flex items-center gap-2 text-sm text-slate-300 mb-2">
             <Users size={16} /> Headcount: {config.headcount}
           </label>
-          <input 
+          <input
             type="range" min="10" max="200" value={config.headcount}
             onChange={(e) => handleChange('headcount', parseInt(e.target.value))}
             className="w-full accent-emerald-500 bg-slate-700 rounded-lg h-2"
@@ -60,7 +60,7 @@ const UI: React.FC<Props> = ({ config, setConfig }) => {
           <label className="flex items-center gap-2 text-sm text-slate-300 mb-2">
             <Zap size={16} /> Collaboration Space: {config.collaborationSpace}%
           </label>
-          <input 
+          <input
             type="range" min="0" max="100" value={config.collaborationSpace}
             onChange={(e) => handleChange('collaborationSpace', parseInt(e.target.value))}
             className="w-full accent-blue-500 bg-slate-700 rounded-lg h-2"
